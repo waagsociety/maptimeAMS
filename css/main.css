@@ -134,7 +134,6 @@ a:visited {
   left: 50%;
   list-style-type: none;
   position: relative;
-  overflow: hidden;
 }
 
 #maptime ul li {
