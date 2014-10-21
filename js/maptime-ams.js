@@ -31,10 +31,15 @@ function drawBuildings(svg, strokes) {
     .style("stroke-width", function(d, i) { return ((strokes.length - i) * 2 - 1) * strokeWidth; });
 }
 
-window.addEventListener("resize", function () {
+function resize() {
   var blurredTop = -d3.select("#maptime")[0][0].getBoundingClientRect().top;
   svgBlurred.attr("transform", "translate(0 " + blurredTop + ")");
-});
+  d3.select("#blur-rect")
+     .attr("width", document.body.clientWidth)
+     .attr("height", document.body.clientHeight);
+}
+
+window.addEventListener("resize", resize);
 
 function newBuilding() {
   d3.select("#timer").attr("class", "");
@@ -80,5 +85,6 @@ function newBuilding() {
 d3.json("{{ site.baseurl }}/data/buildings.json", function(error, json) {
   buildings = json.features;
   newBuilding();
+  resize();
   setInterval(newBuilding, interval);
 });
