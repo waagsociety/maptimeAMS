@@ -15,6 +15,8 @@ To create the GeoJSON file containing [buildings data](/data/buildings.json), do
 - Create buildings table:
 
 ```sql
+CREATE SCHEMA bert; -- Yes, you need this schema 😑
+
 CREATE TABLE bert.panden_amsterdam AS SELECT
   p.identificatie::bigint, bouwjaar::int,
   ST_Transform(p.geovlak, 4326) AS geom,
