@@ -116,9 +116,9 @@ a:visited {
 #maptime {
   position: absolute;
   width: 100%;
-  height: 190px;
+  height: 200px;
   top: 50%;
-  margin: -95px 0 0 0;
+  margin: -100px 0 0 0;
 }
 
 #maptime-container {
