@@ -8,7 +8,7 @@ For more information about Maptime, see [Maptime HQ's website](http://maptime.io
 
 ## Buildings GeoJSON
 
-To create the GeoJSON file containing buildings data (`data/buildings.json`), do the following:
+To create the GeoJSON file containing [buildings data](/data/buildings.json), do the following:
 
 - Download [BAG data file](http://geodata.nationaalgeoregister.nl/inspireadressen/atom/inspireadressen.xml) (1.3 GB)
 - Import data into PostgreSQL/PostGIS database with NLExtract's [Bag-extract](http://nlextract.readthedocs.org/en/latest/bagextract.html)
