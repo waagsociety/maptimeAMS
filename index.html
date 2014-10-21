@@ -1,19 +1,52 @@
+---
+layout:
+title: Maptime Amsterdam
+---
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Maptime Amsterdam</title>
+    <title>{{ page.title }}</title>
     <meta name="viewport" content="width=device-width">
+    <script src="{{ site.baseurl }}/js/d3.v3.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
+    <link rel="icon" type="image/png" href="{{ site.baseurl }}/favicon.png">
   </head>
   <body>
-    <h1>Maptime Amsterdam</h1>
-    <h2>November 19th, Waag Society, Nieuwmarkt 4, Amsterdam</h2>
-    <p><b>Site coming soon!</b></p>
-    <ul>
-      <li><a href="http://www.meetup.com/Maptime-AMS/events/213796602/">Meetup</a></li>
-      <li><a href="https://twitter.com/MaptimeAMS">Twitter</a></li>
-      <li><a href="http://waag.org/nl/event/maptime-ams-1">Waag Society</a></li>
-      <li><a href="https://github.com/waagsociety/maptimeAMS">GitHub</a></li>
-    </ul>
+    <svg id="building">
+      <g>
+      </g>
+    </svg>
+    <div id="address">
+      <a href="" target="_blank"></a>
+      <div id="timer"></div>
+    </div>
+    <div id="maptime">
+      <svg id="building-blurred">
+        <defs>
+          <filter id="blur">
+            <feGaussianBlur stdDeviation="20" />
+          </filter>
+        </defs>
+        <g filter="url(#blur)">
+          <rect width="3000" height="1000" style="fill:none;" />
+        </g>
+      </svg>
+      <div id="maptime-container">
+        <h1>Maptime Amsterdam</h1>
+        <p>Want to learn how to make beautiful maps? Let's do it together! Beginners very welcome!</p>
+        <p><b>
+          Next Maptime:
+          <a href="{{ site.next-event-url }}">{{ site.next-event }}</a>,
+          <a href="{{ site.venue-url }}">{{ site.venue }}</a>
+        </b></p>
+        <ul>
+          {% for link in site.links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a>{% if forloop.last == false %}•{% endif %}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <script src="{{ site.baseurl }}/js/maptime-ams.js" charset="utf-8"></script>
   </body>
 </html>
