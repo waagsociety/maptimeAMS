@@ -198,3 +198,18 @@ path {
   stroke: #652C90;
   fill: white;
 }
+
+.logo {
+  position: absolute;
+  margin: 20px;
+}
+
+#logo-maptime {
+  top: 0;
+  left: 0;
+}
+
+#logo-waag {
+  right: 0;
+  bottom: 0;
+}
