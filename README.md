@@ -6,6 +6,8 @@ This repository contains the [website](http://code.waag.org/maptimeAMS), resourc
 
 For more information about Maptime, see [Maptime HQ's website](http://maptime.io/).
 
+![maptimeAMS](images/maptimeAMS.png)
+
 ## Buildings GeoJSON
 
 To create the GeoJSON file containing [buildings data](/data/buildings.json), do the following:
