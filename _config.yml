@@ -1,7 +1,7 @@
 name: Maptime AMS
 baseurl: /maptimeAMS
 
-animation-interval: 7500
+animation-interval: 5500
 building-stroke-width: 8
 
 venue: Waag Society, Nieuwmarkt 4

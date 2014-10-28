@@ -17,17 +17,17 @@ features = []
 
 sql = <<-SQL
   SELECT
-    points, straatnaam, MIN(huisnummer) AS huisnummer, postcode,
+    points, straatnaam, MIN(huisnummer) AS huisnummer, postcode, plaatsnaam,
     ST_AsGeoJSON(geom) AS geojson, ST_X(ST_Centroid(geom)) AS lat, ST_Y(ST_Centroid(geom)) AS lon
   FROM (
     SELECT DISTINCT ON (identificatie)
-      openbareruimtenaam AS straatnaam, huisnummer::int, postcode,
+      openbareruimtenaam AS straatnaam, huisnummer::int, postcode, plaatsnaam,
       ST_NPoints(geom) AS points, ST_ForceRHR(ST_Force2D(geom)) AS geom
     FROM
       bert.panden_amsterdam
     ORDER BY identificatie, points DESC
   ) g
-  GROUP BY straatnaam, postcode, geom, points
+  GROUP BY straatnaam, postcode, plaatsnaam, geom, points
   ORDER BY points DESC
   LIMIT 450
 SQL
@@ -39,6 +39,7 @@ database.fetch(sql).all do |row|
       straatnaam: row[:straatnaam],
       huisnummer: row[:huisnummer],
       postcode: row[:postcode],
+      plaatsnaam: row[:plaatsnaam],
       centroid: [row[:lat], row[:lon]]
     },
     geometry: JSON.parse(row[:geojson].round_coordinates(6))

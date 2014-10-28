@@ -56,7 +56,7 @@ function newBuilding() {
     .html(building.properties.straatnaam + ' ' + building.properties.huisnummer);
   address.append("span")
     .attr("class", "light")
-    .html(", " + building.properties.postcode + ' Amsterdam');
+    .html(", " + building.properties.postcode + ' ' + building.properties.plaatsnaam);
 
   projection.scale(1).translate([0, 0]);
 

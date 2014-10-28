@@ -6,6 +6,8 @@ This repository contains the [website](http://code.waag.org/maptimeAMS), resourc
 
 For more information about Maptime, see [Maptime HQ's website](http://maptime.io/).
 
+Maptime Amsterdam is hosted by [Waag Society](http://waag.org), and is supported by [FIWARE](http://waag.org/en/project/ngsi-compliancy-citysdk-ld-api) and [Smart City SDK](http://waag.org/en/project/smart-citysdk).
+
 ![maptimeAMS](images/maptimeAMS.png)
 
 ## Buildings GeoJSON
@@ -20,9 +22,11 @@ To create the GeoJSON file containing [buildings data](/data/buildings.json), do
 CREATE SCHEMA bert; -- Yes, you need this schema 😑
 
 CREATE TABLE bert.panden_amsterdam AS SELECT
+  DISTINCT ON (p.identificatie)
   p.identificatie::bigint, bouwjaar::int,
   ST_Transform(p.geovlak, 4326) AS geom,
-  openbareruimtenaam, huisnummer, huisletter, huisnummertoevoeging, postcode
+  openbareruimtenaam, huisnummer, huisletter, huisnummertoevoeging, postcode,
+  wp.woonplaatsnaam AS plaatsnaam
 FROM verblijfsobjectactueelbestaand v
 JOIN verblijfsobjectpandactueel vp
   ON vp.identificatie = v.identificatie
@@ -38,3 +42,15 @@ JOIN woonplaatsactueelbestaand wp
 ```
 
 - Run `ruby buildings.rb`
+
+## Save a single building as SVG from PostgreSQL
+
+```sql
+SELECT
+  ST_AsSVG(ST_Scale(ST_Translate(ST_Transform(geom, 28992), -121849, -487326), 2, 2))
+FROM
+  bert.panden_amsterdam
+WHERE
+  openbareruimtenaam = 'Nieuwmarkt' AND huisnummer = 4
+LIMIT 1
+```
