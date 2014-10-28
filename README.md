@@ -24,7 +24,7 @@ CREATE SCHEMA bert; -- Yes, you need this schema 😑
 CREATE TABLE bert.panden_amsterdam AS SELECT
   DISTINCT ON (p.identificatie)
   p.identificatie::bigint, bouwjaar::int,
-  ST_Transform(p.geovlak, 4326) AS geom,
+  ST_ForceRHR(ST_Force2D(ST_Transform(p.geovlak, 4326))) AS geom,
   openbareruimtenaam, huisnummer, huisletter, huisnummertoevoeging, postcode,
   wp.woonplaatsnaam AS plaatsnaam
 FROM verblijfsobjectactueelbestaand v
